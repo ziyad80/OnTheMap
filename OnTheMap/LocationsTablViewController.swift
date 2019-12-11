@@ -30,6 +30,12 @@ class LocationsTablViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func LogOutButton(_ sender: Any) {
+        OnTheMapClient.logout()
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     
     var studentLocation: [Result] {
         get {

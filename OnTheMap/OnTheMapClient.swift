@@ -23,6 +23,7 @@ class OnTheMapClient {
         case studentLocation
         case postLocation
         case userData
+        case logOut
         
         var stringValue: String{
             switch self{
@@ -30,6 +31,7 @@ class OnTheMapClient {
             case .studentLocation: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
             case .postLocation: return Endpoints.base + "StudentLocation"
             case .userData: return Endpoints.base + "users/" + OnTheMapClient.Auth.sessionId
+            case .logOut: return Endpoints.base + "session"
             }
         }
     
@@ -186,6 +188,31 @@ class OnTheMapClient {
                 completion([], error)
             }
         }
+    }
+    
+    class func logout() -> Void {
+        var request = URLRequest(url: Endpoints.logOut.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error…
+                return
+            }
+            let range = (5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
+        
+        
     }
     
 }

@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="-162" y="361"/>
         </scene>
-        <!--Item-->
+        <!--Locations Tabl View Controller-->
         <scene sceneID="1gL-md-7OP">
             <objects>
                 <viewController id="bVi-b6-hvY" customClass="LocationsTablViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,6 +135,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQi-ic-68n">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
+                                    <barButtonItem title="Logout" id="CYT-bv-uZz">
+                                        <connections>
+                                            <action selector="LogOutButton:" destination="bVi-b6-hvY" id="4Ul-y6-I29"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Xle-dL-Cmz"/>
                                     <barButtonItem systemItem="refresh" id="xlq-JX-lU9">
                                         <connections>
@@ -156,7 +161,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V6D-cL-7ea"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="icon_listview-selected" id="dhk-6l-71y"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_listview-selected" id="dhk-6l-71y"/>
                     <connections>
                         <outlet property="tableView" destination="Czf-NJ-GW3" id="z5c-PG-S4n"/>
                     </connections>
@@ -256,7 +261,7 @@
             </objects>
             <point key="canvasLocation" x="1691.304347826087" y="834.375"/>
         </scene>
-        <!--Item-->
+        <!--Map View Controller-->
         <scene sceneID="6QI-s4-RSf">
             <objects>
                 <viewController id="8kk-O6-bZ1" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -304,7 +309,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N9f-g9-MZo"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="icon_mapview-deselected" id="OUY-o9-h1a" userLabel="Map View"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="OUY-o9-h1a" userLabel="Map View"/>
                     <connections>
                         <outlet property="mapView" destination="kxZ-gV-ilQ" id="uTK-6G-Zih"/>
                         <segue destination="X1v-u6-SwH" kind="show" identifier="postLocationVC" id="fS9-cD-m6O"/>
