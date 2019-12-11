@@ -9,9 +9,11 @@
 import Foundation
 class OnTheMapClient {
     struct Auth {
-        static var usernam = ""
+        static var lastName = ""
+        static var firstName = ""
         static var passowrd = ""
         static var sessionId = ""
+        static var userKey = ""
     }
     enum Endpoints {
         
@@ -19,11 +21,15 @@ class OnTheMapClient {
         
         case login
         case studentLocation
+        case postLocation
+        case userData
         
         var stringValue: String{
             switch self{
             case .login: return Endpoints.base + "session"
             case .studentLocation: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
+            case .postLocation: return Endpoints.base + "StudentLocation"
+            case .userData: return Endpoints.base + "users/" + OnTheMapClient.Auth.sessionId
             }
         }
     
@@ -65,6 +71,30 @@ class OnTheMapClient {
             }
         }
         task.resume()
+    }
+    
+    class func getUserName()-> Void{
+       
+        
+      let task = URLSession.shared.dataTask(with: OnTheMapClient.Endpoints.userData.url) { (data, response, error) in
+
+      
+        guard let data = data else {return}
+           let range = (5..<data.count)
+           let newData = data.subdata(in: range) /* subset response data! */
+
+        do{
+            let userData = try JSONDecoder().decode(SessionResponce.self, from: newData)
+            OnTheMapClient.Auth.firstName = userData.firstName
+            OnTheMapClient.Auth.lastName = userData.lastName
+            
+        }
+            catch let jsonErr{
+                print("ERROR", jsonErr.localizedDescription)
+        print("WE DO NOT GET THE INFO!!")
+        }
+    }
+     task.resume()
     }
     
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
@@ -111,6 +141,42 @@ class OnTheMapClient {
         
         return task
     }
+    
+    class func taskForGETRequestWithRange<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let range = (5..<data.count)
+            let newData = data.subdata(in: range) /* subset response data! */
+            //
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                do {
+                    let errorResponse = try decoder.decode(OnTheMapRespons.self, from: data) as Error
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
     
     class func getStudentLocation(completion: @escaping ([Result], Error?) -> Void) {
         taskForGETRequest(url: Endpoints.studentLocation.url, responseType: StudenLocationsRequest.self) { response, error in

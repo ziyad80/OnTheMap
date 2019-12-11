@@ -21,6 +21,11 @@
 		48C03A752389ACF600519A0C /* LocationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A742389ACF600519A0C /* LocationsModel.swift */; };
 		48C03A77238ADFEC00519A0C /* LocationsTablViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A76238ADFEC00519A0C /* LocationsTablViewController.swift */; };
 		48C03A7D238B11E300519A0C /* LocationsTablViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A7C238B11E300519A0C /* LocationsTablViewCell.swift */; };
+		48C03A7F2398C8AA00519A0C /* PostLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A7E2398C8AA00519A0C /* PostLocation.swift */; };
+		48C03A812398CE8C00519A0C /* PostLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A802398CE8C00519A0C /* PostLocationRequest.swift */; };
+		48C03A83239AF8EC00519A0C /* SessionResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A82239AF8EC00519A0C /* SessionResponce.swift */; };
+		48C03A86239F7AD700519A0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C03A85239F7AD700519A0C /* MapKit.framework */; };
+		48C03A8823A0229500519A0C /* GetUserName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A8723A0229500519A0C /* GetUserName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		48C03A742389ACF600519A0C /* LocationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsModel.swift; sourceTree = "<group>"; };
 		48C03A76238ADFEC00519A0C /* LocationsTablViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTablViewController.swift; sourceTree = "<group>"; };
 		48C03A7C238B11E300519A0C /* LocationsTablViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTablViewCell.swift; sourceTree = "<group>"; };
+		48C03A7E2398C8AA00519A0C /* PostLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocation.swift; sourceTree = "<group>"; };
+		48C03A802398CE8C00519A0C /* PostLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationRequest.swift; sourceTree = "<group>"; };
+		48C03A82239AF8EC00519A0C /* SessionResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponce.swift; sourceTree = "<group>"; };
+		48C03A85239F7AD700519A0C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		48C03A8723A0229500519A0C /* GetUserName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C03A86239F7AD700519A0C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +69,7 @@
 			children = (
 				48C03A532376120E00519A0C /* OnTheMap */,
 				48C03A522376120E00519A0C /* Products */,
+				48C03A84239F7AD700519A0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,12 +91,16 @@
 				48C03A7C238B11E300519A0C /* LocationsTablViewCell.swift */,
 				48C03A562376120E00519A0C /* ViewController.swift */,
 				48C03A582376120E00519A0C /* Main.storyboard */,
+				48C03A7E2398C8AA00519A0C /* PostLocation.swift */,
 				48C03A5B2376121200519A0C /* Assets.xcassets */,
 				48C03A5D2376121200519A0C /* LaunchScreen.storyboard */,
 				48C03A602376121200519A0C /* Info.plist */,
 				48C03A662376F0AC00519A0C /* OnTheMapClient.swift */,
 				48C03A682376F48300519A0C /* LoginRequest.swift */,
 				48C03A71237B38F700519A0C /* StudenLocationsRequest.swift */,
+				48C03A802398CE8C00519A0C /* PostLocationRequest.swift */,
+				48C03A82239AF8EC00519A0C /* SessionResponce.swift */,
+				48C03A8723A0229500519A0C /* GetUserName.swift */,
 				48C03A6A2376FBC200519A0C /* OnTheMapRespons.swift */,
 				48C03A6C2377417F00519A0C /* RequestTokenResponse.swift */,
 			);
@@ -105,6 +121,14 @@
 				48C03A742389ACF600519A0C /* LocationsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		48C03A84239F7AD700519A0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48C03A85239F7AD700519A0C /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +163,11 @@
 				TargetAttributes = {
 					48C03A502376120E00519A0C = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -182,13 +211,17 @@
 				48C03A572376120E00519A0C /* ViewController.swift in Sources */,
 				48C03A6B2376FBC200519A0C /* OnTheMapRespons.swift in Sources */,
 				48C03A7D238B11E300519A0C /* LocationsTablViewCell.swift in Sources */,
+				48C03A8823A0229500519A0C /* GetUserName.swift in Sources */,
 				48C03A552376120E00519A0C /* AppDelegate.swift in Sources */,
+				48C03A83239AF8EC00519A0C /* SessionResponce.swift in Sources */,
 				48C03A6D2377417F00519A0C /* RequestTokenResponse.swift in Sources */,
 				48C03A692376F48300519A0C /* LoginRequest.swift in Sources */,
 				48C03A70237A1EE000519A0C /* MapViewController.swift in Sources */,
+				48C03A7F2398C8AA00519A0C /* PostLocation.swift in Sources */,
 				48C03A72237B38F700519A0C /* StudenLocationsRequest.swift in Sources */,
 				48C03A77238ADFEC00519A0C /* LocationsTablViewController.swift in Sources */,
 				48C03A752389ACF600519A0C /* LocationsModel.swift in Sources */,
+				48C03A812398CE8C00519A0C /* PostLocationRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

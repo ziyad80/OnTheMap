@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         request.httpBody = try! JSONEncoder().encode(post)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            if let response = response {
+            if response != nil {
                 completion(true, nil)
             } else {
                 completion(false, error)
@@ -54,8 +54,12 @@ class ViewController: UIViewController {
                
                       let RequestTokenResponses = try
                        JSONDecoder().decode(RequestTokenResponse.self, from: newData!)
-                      print(RequestTokenResponses)
+                    OnTheMapClient.Auth.userKey = RequestTokenResponses.account.key
+                OnTheMapClient.Auth.sessionId = RequestTokenResponses.session.id
+                OnTheMapClient.getUserName()
+                 
                   }
+               
                catch let jsonErr{
                       print("ERROR", jsonErr)}
             
@@ -73,8 +77,12 @@ class ViewController: UIViewController {
         postingASession(username: usernameTextField.text ?? "" , password: PasswordTextField.text ?? "") { (success: Bool, error: Error?) in
           
             if success{
+               
                 DispatchQueue.main.async {
+                    
                 self.performSegue(withIdentifier: "completeLogin", sender: nil)
+                   
+                    
                 }
               
                 

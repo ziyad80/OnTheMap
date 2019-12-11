@@ -9,60 +9,87 @@
 import Foundation
 import UIKit
 
-class LocationsTablViewController: UIViewController {
+class LocationsTablViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    func getData() -> Void {
+        
+        OnTheMapClient.getStudentLocation() { result, error in
+            self.studentLocation = result
+            self.tableView.reloadData()
+            print("Data Reloded")
+        
+    
+    }
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        getData()
+        
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedIndex = 0
-    var studentLocation: [Result]{
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        return appDelegate.results
-    }
     
+    var studentLocation: [Result] {
+        get {
+            return LocationsModel.locations
+        }
+        set {
+            LocationsModel.locations = newValue
+        }
+    }
+//    var studentLocation: [Result]{
+//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//        return appDelegate.results
+//    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        _ = OnTheMapClient.getStudentLocation() { result, error in
-            LocationsModel.locations = result
-            
-            self.tableView.reloadData()
-            }
-        
-        
+    
+        guard self.studentLocation.isEmpty else {
+            return
         }
+        getData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        print("viewWillAppear: ", LocationsModel.locations.count)
+        print("viewWillAppear: ", studentLocation.count)
     }
 
-}
-    extension LocationsTablViewController: UITableViewDataSource, UITableViewDelegate {
+
+    //extension LocationsTablViewController: UITableViewDataSource, UITableViewDelegate {
         
-        
+      
         func numberOfSections(in tableView: UITableView) -> Int {
             return 1
         }
-        
+    
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            print("numberOfRowsInSection: ", LocationsModel.locations.count)
-            return LocationsModel.locations.count
+            print("numberOfRowsInSection ", studentLocation.count)
+            return studentLocation.count
             
         }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationsTablViewCell", for: indexPath) as! LocationsTablViewCell
-        let location = LocationsModel.locations[indexPath.row]
-        cell.studentName.text = "\(location.firstName + "  " + location.lastName) ... \(location.mapString)"
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationsTablViewCell", for: indexPath) as! LocationsTablViewCell
+        let location = studentLocation[indexPath.row]
+       
+       cell.textLabel?.text = "\(location.firstName + " " + location.lastName )"
+        cell.detailTextLabel?.text = location.mapString
+//        cell.studentName.text = "\(location.firstName + " " + location.lastName ) ... \(location.mapString )"
+//
 //        cell.studentLocation.text = location.mapString
        
         return cell
     }
     
-    
+   
     
     
     
