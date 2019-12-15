@@ -75,7 +75,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="GiG-WO-qk5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cqd-xw-mLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="EA0-oI-diK" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ncK-Wh-6JT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -87,8 +86,25 @@
                         <segue destination="bVi-b6-hvY" kind="relationship" relationship="viewControllers" id="d9c-RR-Ijj"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cqd-xw-mLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-162" y="361"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nCr-TY-NyI">
+            <objects>
+                <navigationController id="Pty-We-EuA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uc2-dG-mua">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bVi-b6-hvY" kind="relationship" relationship="rootViewController" id="Jbp-dh-xm3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qdI-VW-EIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162" y="1106"/>
         </scene>
         <!--Locations Tabl View Controller-->
         <scene sceneID="1gL-md-7OP">
@@ -99,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Czf-NJ-GW3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationsTablViewCell" textLabel="lqF-ql-Wm0" detailTextLabel="N2i-DP-anV" style="IBUITableViewCellStyleSubtitle" id="1cQ-pg-ETe" customClass="LocationsTablViewCell" customModule="OnTheMap" customModuleProvider="target">
@@ -132,36 +148,38 @@
                                     <outlet property="delegate" destination="bVi-b6-hvY" id="RIY-TO-58W"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQi-ic-68n">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJl-Zx-WCd">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <barButtonItem title="Logout" id="CYT-bv-uZz">
-                                        <connections>
-                                            <action selector="LogOutButton:" destination="bVi-b6-hvY" id="4Ul-y6-I29"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Xle-dL-Cmz"/>
-                                    <barButtonItem systemItem="refresh" id="xlq-JX-lU9">
-                                        <connections>
-                                            <action selector="refresh:" destination="bVi-b6-hvY" id="S3y-3Y-M0h"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <navigationItem title="Table View" id="SQY-eg-GYr">
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="CYT-bv-uZz">
+                                            <connections>
+                                                <action selector="LogOutButton:" destination="bVi-b6-hvY" id="4Ul-y6-I29"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="xlq-JX-lU9">
+                                            <connections>
+                                                <action selector="refresh:" destination="bVi-b6-hvY" id="S3y-3Y-M0h"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
-                            </toolbar>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HJl-Zx-WCd" firstAttribute="top" secondItem="gq5-Mg-Jqe" secondAttribute="top" constant="44" id="2E8-bf-VKB"/>
+                            <constraint firstItem="Czf-NJ-GW3" firstAttribute="top" secondItem="HJl-Zx-WCd" secondAttribute="bottom" id="Fbk-uP-X2R"/>
                             <constraint firstItem="Czf-NJ-GW3" firstAttribute="leading" secondItem="V6D-cL-7ea" secondAttribute="leading" id="Jx7-0m-0AH"/>
+                            <constraint firstItem="HJl-Zx-WCd" firstAttribute="leading" secondItem="V6D-cL-7ea" secondAttribute="leading" id="UFl-EO-zqV"/>
                             <constraint firstItem="Czf-NJ-GW3" firstAttribute="trailing" secondItem="V6D-cL-7ea" secondAttribute="trailing" id="Wn3-hB-KKP"/>
-                            <constraint firstItem="Czf-NJ-GW3" firstAttribute="top" secondItem="HQi-ic-68n" secondAttribute="bottom" id="YxW-hY-2cH"/>
-                            <constraint firstItem="HQi-ic-68n" firstAttribute="trailing" secondItem="V6D-cL-7ea" secondAttribute="trailing" id="dQO-aF-0pM"/>
                             <constraint firstItem="Czf-NJ-GW3" firstAttribute="bottom" secondItem="V6D-cL-7ea" secondAttribute="bottom" id="jHN-nW-9lg"/>
-                            <constraint firstItem="HQi-ic-68n" firstAttribute="top" secondItem="V6D-cL-7ea" secondAttribute="top" id="sLU-0i-fxk"/>
-                            <constraint firstItem="HQi-ic-68n" firstAttribute="leading" secondItem="V6D-cL-7ea" secondAttribute="leading" id="uwS-zS-jdl"/>
+                            <constraint firstItem="HJl-Zx-WCd" firstAttribute="trailing" secondItem="V6D-cL-7ea" secondAttribute="trailing" id="pVq-ZP-kL4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V6D-cL-7ea"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-selected" id="dhk-6l-71y"/>
+                    <navigationItem key="navigationItem" id="Oyc-Dd-gQd"/>
                     <connections>
                         <outlet property="tableView" destination="Czf-NJ-GW3" id="z5c-PG-S4n"/>
                     </connections>
@@ -274,37 +292,39 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kxZ-gV-ilQ">
-                                <rect key="frame" x="4" y="88" width="406" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <connections>
                                     <outlet property="delegate" destination="8kk-O6-bZ1" id="HOS-Hf-vYc"/>
                                 </connections>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1V-fi-8Xh">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWf-Af-VWg">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <barButtonItem image="icon_addpin" id="s6v-tc-AG7">
-                                        <connections>
-                                            <action selector="addLocation:" destination="8kk-O6-bZ1" id="iJC-l2-5nz"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dh2-3x-WrO"/>
-                                    <barButtonItem image="icon_refresh" id="5nH-Du-W40">
-                                        <connections>
-                                            <action selector="refreshMap:" destination="8kk-O6-bZ1" id="jKT-XN-jwt"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <navigationItem title="Map" id="sFZ-Di-IBH">
+                                        <barButtonItem key="leftBarButtonItem" image="icon_addpin" id="s6v-tc-AG7">
+                                            <connections>
+                                                <action selector="addLocation:" destination="8kk-O6-bZ1" id="iJC-l2-5nz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="5nH-Du-W40">
+                                            <connections>
+                                                <action selector="refreshMap:" destination="8kk-O6-bZ1" id="jKT-XN-jwt"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
-                            </toolbar>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="I1V-fi-8Xh" firstAttribute="trailing" secondItem="N9f-g9-MZo" secondAttribute="trailing" id="9YJ-4H-8oa"/>
-                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="leading" secondItem="VWv-Sr-290" secondAttribute="leadingMargin" constant="-16" id="Bhs-Gu-96M"/>
-                            <constraint firstItem="I1V-fi-8Xh" firstAttribute="top" secondItem="p5w-K4-QQF" secondAttribute="bottom" id="E4v-Qt-TUI"/>
-                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="top" secondItem="I1V-fi-8Xh" secondAttribute="bottom" id="JFN-iq-gTT"/>
-                            <constraint firstItem="I1V-fi-8Xh" firstAttribute="leading" secondItem="N9f-g9-MZo" secondAttribute="leading" id="cCv-Ar-DJv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kxZ-gV-ilQ" secondAttribute="trailing" constant="-16" id="lcr-97-wfb"/>
-                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="top" secondItem="I1V-fi-8Xh" secondAttribute="bottom" id="lfA-bz-T93"/>
+                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="top" secondItem="OWf-Af-VWg" secondAttribute="bottom" id="0dI-ew-r4d"/>
+                            <constraint firstItem="OWf-Af-VWg" firstAttribute="trailing" secondItem="N9f-g9-MZo" secondAttribute="trailing" id="407-VT-y77"/>
+                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="top" secondItem="OWf-Af-VWg" secondAttribute="bottom" id="A2P-Yp-VR4"/>
+                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="centerX" secondItem="OWf-Af-VWg" secondAttribute="centerX" id="BGS-tb-Gbh"/>
+                            <constraint firstItem="kxZ-gV-ilQ" firstAttribute="leading" secondItem="N9f-g9-MZo" secondAttribute="leading" id="Bhs-Gu-96M"/>
+                            <constraint firstItem="OWf-Af-VWg" firstAttribute="leading" secondItem="N9f-g9-MZo" secondAttribute="leading" id="SVS-6a-PdH"/>
+                            <constraint firstItem="OWf-Af-VWg" firstAttribute="top" secondItem="N9f-g9-MZo" secondAttribute="top" id="bEv-aG-Z3Y"/>
+                            <constraint firstItem="N9f-g9-MZo" firstAttribute="trailing" secondItem="kxZ-gV-ilQ" secondAttribute="trailing" id="lcr-97-wfb"/>
                             <constraint firstItem="WON-gB-LD7" firstAttribute="top" secondItem="kxZ-gV-ilQ" secondAttribute="bottom" id="tdP-WU-OOk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N9f-g9-MZo"/>
@@ -317,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltk-Zc-K4N" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1308.6956521739132" y="20.758928571428569"/>
+            <point key="canvasLocation" x="1691" y="-24"/>
         </scene>
     </scenes>
     <resources>
@@ -326,4 +346,7 @@
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_refresh" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Jbp-dh-xm3"/>
+    </inferredMetricsTieBreakers>
 </document>
