@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     }
     func postingASession(username: String, password: String, completion: @escaping (Bool, Error?) -> Void){
         let post = LoginRequest( udacity: Udacity(username: username , password: password ))
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        var request = URLRequest(url: OnTheMapClient.Endpoints.login.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -41,15 +41,17 @@ class ViewController: UIViewController {
         request.httpBody = try! JSONEncoder().encode(post)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            if response != nil {
+            
+            let httpResponse = response as! HTTPURLResponse;()
+            if httpResponse.statusCode <= 299 {
                 completion(true, nil)
             } else {
                 completion(false, error)
             }
-        
+            
             let range = (5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
-            
+            //print("print Login data: ", String(data: newData!, encoding: .utf8)!)
             do{
                
                       let RequestTokenResponses = try
@@ -87,7 +89,11 @@ class ViewController: UIViewController {
               
                 
             } else{
-                print("ERROR!!",error?.localizedDescription as Any)
+                DispatchQueue.main.async {
+                    MessagInfoAlert.showAlert(title: "Login failed", message: "Invalid username or password")
+                    print("ERROR!!",error?.localizedDescription as Any)
+                }
+                
             }
         }
         

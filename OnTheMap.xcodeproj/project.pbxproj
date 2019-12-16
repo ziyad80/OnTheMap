@@ -26,6 +26,7 @@
 		48C03A83239AF8EC00519A0C /* SessionResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A82239AF8EC00519A0C /* SessionResponce.swift */; };
 		48C03A86239F7AD700519A0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C03A85239F7AD700519A0C /* MapKit.framework */; };
 		48C03A8823A0229500519A0C /* GetUserName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03A8723A0229500519A0C /* GetUserName.swift */; };
+		48C03AB123A842C700519A0C /* MessagInfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C03AB023A842C700519A0C /* MessagInfoAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		48C03A82239AF8EC00519A0C /* SessionResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponce.swift; sourceTree = "<group>"; };
 		48C03A85239F7AD700519A0C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		48C03A8723A0229500519A0C /* GetUserName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserName.swift; sourceTree = "<group>"; };
+		48C03AB023A842C700519A0C /* MessagInfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagInfoAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				48C03A76238ADFEC00519A0C /* LocationsTablViewController.swift */,
 				48C03A7C238B11E300519A0C /* LocationsTablViewCell.swift */,
 				48C03A562376120E00519A0C /* ViewController.swift */,
+				48C03AB023A842C700519A0C /* MessagInfoAlert.swift */,
 				48C03A582376120E00519A0C /* Main.storyboard */,
 				48C03A7E2398C8AA00519A0C /* PostLocation.swift */,
 				48C03A5B2376121200519A0C /* Assets.xcassets */,
@@ -211,6 +214,7 @@
 				48C03A572376120E00519A0C /* ViewController.swift in Sources */,
 				48C03A6B2376FBC200519A0C /* OnTheMapRespons.swift in Sources */,
 				48C03A7D238B11E300519A0C /* LocationsTablViewCell.swift in Sources */,
+				48C03AB123A842C700519A0C /* MessagInfoAlert.swift in Sources */,
 				48C03A8823A0229500519A0C /* GetUserName.swift in Sources */,
 				48C03A552376120E00519A0C /* AppDelegate.swift in Sources */,
 				48C03A83239AF8EC00519A0C /* SessionResponce.swift in Sources */,

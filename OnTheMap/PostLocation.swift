@@ -53,7 +53,8 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
         geocoder.geocodeAddressString(mapSearchBar.text!) { (placemarks: [CLPlacemark]?, error: Error?) in
             if error == nil {
                 
-                let placemark = placemarks?.first
+               
+               let placemark = placemarks?.first
                 let anno = MKPointAnnotation()
                 anno.coordinate = (placemark?.location?.coordinate)!
                 anno.title = placemark?.locality
@@ -65,7 +66,8 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
                 
                 
             }else{
-                print(error?.localizedDescription ?? "ERROR")
+                
+                print(error?.localizedDescription ?? "Couldn't find the location")
             }
         }
         
@@ -85,8 +87,13 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
         request.httpBody = try! JSONEncoder().encode(post)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            if response != nil {
+            let httpResponse = response as! HTTPURLResponse;()
+            if httpResponse.statusCode <= 299 {
                 completion(true, nil)
+                let range = (5..<data!.count)
+                let newData = data?.subdata(in: range) /* subset response data! */
+                print("post location data: ", String(data: newData!, encoding: .utf8)!)
+                
                 
             } else {
                 completion(false, error)
@@ -106,9 +113,20 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
         
         postingLocation { (success: Bool, error : Error?) in
             if success{
-                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async{
+                    MessagInfoAlert.showAlert(title: "Congrats", message: "You have been post your location")
+                    self.navigationController?.popViewController(animated: true)
+                   
+                   
+                    
+                }
+               
             } else {
-                print(error?.localizedDescription ?? "")
+                DispatchQueue.main.async {
+                    MessagInfoAlert.showAlert(title: "Posting Location Failed", message: error?.localizedDescription ?? "try again")
+                     print(error?.localizedDescription ?? "")
+                }
+               
             }
         }
         
@@ -124,16 +142,13 @@ extension PostLocation : CLLocationManagerDelegate {
     }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-       
-        
-        
-    }
+   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error:: \(error.localizedDescription)")
-    }
+
+   }
+   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+       print("error:: \(error.localizedDescription)")
+   }
 
 }
     

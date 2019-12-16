@@ -23,9 +23,9 @@ class LocationsTablViewController: UIViewController, UITableViewDataSource, UITa
     }
     }
     
-    @IBAction func refresh(_ sender: Any) {
-        getData()
-        
+   
+    @IBAction func addLocationFromTable(_ sender: Any) {
+        self.performSegue(withIdentifier: "postLocationVC", sender: nil)
     }
     
     @IBOutlet weak var tableView: UITableView!

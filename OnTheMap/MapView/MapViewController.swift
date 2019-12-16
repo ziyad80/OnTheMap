@@ -12,8 +12,12 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    @IBAction func refreshMap(_ sender: Any) {
-        getDataOnTheMap()
+  
+    @IBAction func logoutButtonOnMapView(_ sender: Any) {
+        OnTheMapClient.logout()
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func addLocation(_ sender: Any) {
