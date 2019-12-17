@@ -39,7 +39,7 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        urlTextField.text = ""
+        urlTextField.text = nil
         
         
         
@@ -51,23 +51,37 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
         
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(mapSearchBar.text!) { (placemarks: [CLPlacemark]?, error: Error?) in
+            DispatchQueue.main.async {
+            
             if error == nil {
+                
                 
                
                let placemark = placemarks?.first
                 let anno = MKPointAnnotation()
                 anno.coordinate = (placemark?.location?.coordinate)!
                 anno.title = placemark?.locality
+                
                 self.postLocationMap.addAnnotation(anno)
                 self.postLocationMap.selectAnnotation(anno, animated: true)
                 self.mapString1 = placemark?.locality ?? self.mapSearchBar.text!
                 self.latitude = (placemark?.location?.coordinate.latitude)!
                 self.longitude = (placemark?.location?.coordinate.longitude)!
+                let latDelta:CLLocationDegrees = 0.05
                 
+                let lonDelta:CLLocationDegrees = 0.05
+                
+                let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+                let location = CLLocationCoordinate2DMake(self.latitude, self.longitude)
+                let region = MKCoordinateRegion(center: location, span: span)
+
+                self.postLocationMap.setRegion(region, animated: false)
                 
             }else{
                 
+                MessagInfoAlert.showAlert(title: "ERROR", message: error?.localizedDescription ?? "Couldn't find the location")
                 print(error?.localizedDescription ?? "Couldn't find the location")
+            }
             }
         }
         
@@ -97,7 +111,11 @@ class PostLocation: UIViewController, UISearchBarDelegate, UITextFieldDelegate {
                 
             } else {
                 completion(false, error)
+                DispatchQueue.main.sync {
+                    
+                MessagInfoAlert.showAlert(title: "Error", message: error?.localizedDescription ?? "")
                 print(error?.localizedDescription ?? "")
+                }
             }
     
    }
